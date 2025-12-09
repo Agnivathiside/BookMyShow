@@ -7,7 +7,7 @@ import com.bookMyShowClone.authService.dto.responseDto.UserResponse;
 import org.springframework.security.core.Authentication;
 
 public interface AuthService {
-    UserResponse register(RegisterRequest request);
+    UserResponse register(RegisterRequest request) throws Throwable;
     AuthResponse login(LoginRequest request);
     UserResponse getCurrentUser(Authentication auth);
     AuthResponse refreshToken(String refreshToken);

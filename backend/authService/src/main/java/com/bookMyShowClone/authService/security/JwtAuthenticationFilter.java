@@ -77,6 +77,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         // Exclude /auth/** from JWT validation
         String path = request.getServletPath();
-        return path.startsWith("/auth");
+        return path.equals("/auth/login")
+                || path.equals("/auth/register")
+                || path.equals("/auth/refresh");
+
     }
 }
