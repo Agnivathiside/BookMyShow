@@ -1,0 +1,82 @@
+flowchart TB
+
+subgraph UI["Frontend (Appsmith / React)"]
+end
+
+UI --> Gateway
+
+subgraph G["API Gateway"]
+end
+
+Gateway --> Auth
+Gateway --> Movie
+Gateway --> Theatre
+Gateway --> Showtime
+Gateway --> Booking
+Gateway --> Payment
+Gateway --> Notification
+Gateway --> Search
+Gateway --> Recommendation
+
+subgraph Auth["Auth Service"]
+AuthDB[(Postgres - Users)]
+end
+
+subgraph Movie["Movie Service"]
+MovieDB[(Postgres - Movies)]
+end
+
+subgraph Theatre["Theatre Service"]
+TheatreDB[(Postgres - Theatres & Screens)]
+end
+
+subgraph Showtime["Showtime Service"]
+ShowtimeDB[(Postgres - Shows)]
+end
+
+subgraph Booking["Booking Service (Saga Orchestrator)"]
+BookingDB[(Postgres - Bookings)]
+Redis[(Redis - Seat Locks)]
+end
+
+subgraph Payment["Payment Service"]
+PaymentDB[(Postgres - Payments)]
+end
+
+subgraph Notification["Notification Service"]
+end
+
+subgraph Audit["Audit Service"]
+AuditDB[(Postgres - Audit Events)]
+end
+
+subgraph Search["Search Service"]
+ES[(Elasticsearch)]
+end
+
+subgraph Recommendation["Recommendation Service"]
+end
+
+%% Kafka Backbone
+subgraph Kafka["Kafka Cluster"]
+BookingEvents[(booking-events)]
+PaymentEvents[(payment-events)]
+SeatLockEvents[(seat-lock-events)]
+NotificationEvents[(notification-events)]
+AuditEvents[(audit-events)]
+end
+
+Booking -->|produce| BookingEvents
+Payment -->|produce| PaymentEvents
+Booking -->|produce| SeatLockEvents
+Booking -->|produce| NotificationEvents
+Payment -->|produce| NotificationEvents
+
+BookingEvents --> Payment
+PaymentEvents --> Booking
+BookingEvents --> Notification
+PaymentEvents --> Notification
+BookingEvents --> Audit
+PaymentEvents --> Audit
+SeatLockEvents --> Audit
+

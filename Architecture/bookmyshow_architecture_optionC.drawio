@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="BookMyShow - Option C (Ultra)" id="optC">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="2000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Top: Users & CI -->
+        <mxCell id="users" value="Users / Demo" style="rounded=1;fillColor=#E8F0FE;fontSize=12;strokeColor=#2B6CB0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="140" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ci" value="CI/CD (GitHub Actions / Jenkins)\nBuild → Test → Docker → Helm" style="rounded=1;fillColor=#FEF3C7;fontSize=11;strokeColor=#F59E0B;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- K8s Cluster box -->
+        <mxCell id="k8s_box" value="Kubernetes Cluster (Kind/Minikube / Cloud)" style="rounded=1;fillColor=#F8FAFC;fontSize=12;strokeColor=#94A3B8;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="110" width="1280" height="1050" as="geometry"/>
+        </mxCell>
+
+        <!-- Ingress / Gateway -->
+        <mxCell id="ingress" value="Ingress / NGINX\nAPI Gateway" style="rounded=1;fillColor=#FEF6E7;fontSize=12;strokeColor=#F59E0B;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="240" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Namespace: Core services -->
+        <mxCell id="ns_core" value="Namespace: core-services" style="rounded=1;fillColor=none;strokeColor=#CBD5E1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="230" width="560" height="420" as="geometry"/>
+        </mxCell>
+
+        <!-- Auth Deployment -->
+        <mxCell id="auth_dep" value="Auth Deployment\nreplicas=2\nPod: keycloak / spring-auth" style="rounded=1;fillColor=#F0FFF4;fontSize=11;strokeColor=#16A34A;" vertex="1" parent="1">
+          <mxGeometry x="80" y="260" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="auth_svc" value="Service: auth-svc" style="ellipse;fillColor=#ECFDF5;fontSize=11;strokeColor=#166534;" vertex="1" parent="1">
+          <mxGeometry x="130" y="350" width="140" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Movie Deployment -->
+        <mxCell id="movie_dep" value="Movie Deployment\nreplicas=2" style="rounded=1;fillColor=#F8FAFC;fontSize=11;strokeColor=#0EA5E9;" vertex="1" parent="1">
+          <mxGeometry x="340" y="260" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="movie_svc" value="Service: movie-svc" style="ellipse;fillColor=#EFF6FF;fontSize=11;strokeColor=#0369A1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="350" width="140" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Theatre Deployment -->
+        <mxCell id="theatre_dep" value="Theatre Deployment\nreplicas=2" style="rounded=1;fillColor=#FFF7ED;fontSize=11;strokeColor=#F97316;" vertex="1" parent="1">
+          <mxGeometry x="80" y="360" width="240" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="theatre_svc" value="Service: theatre-svc" style="ellipse;fillColor=#FFF7ED;fontSize=11;strokeColor=#C2410C;" vertex="1" parent="1">
+          <mxGeometry x="130" y="450" width="140" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Booking Deployment -->
+        <mxCell id="booking_dep" value="Booking Deployment\nreplicas=3\nSaga Orchestrator" style="rounded=1;fillColor=#FEF3F2;fontSize=11;strokeColor=#DC2626;" vertex="1" parent="1">
+          <mxGeometry x="340" y="360" width="240" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="booking_svc" value="Service: booking-svc" style="ellipse;fillColor=#FFF1F2;fontSize=11;strokeColor=#991B1B;" vertex="1" parent="1">
+          <mxGeometry x="390" y="470" width="140" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Redis StatefulSet -->
+        <mxCell id="redis_ss" value="Redis StatefulSet\n(3 replicas)\nSeat Lock Leases + Lua" style="rounded=1;fillColor=#FFF1F2;fontSize=11;strokeColor=#B91C1C;" vertex="1" parent="1">
+          <mxGeometry x="620" y="260" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Payment Deployment -->
+        <mxCell id="payment_dep" value="Payment Deployment\nreplicas=2\n(Mock Gateway)" style="rounded=1;fillColor=#ECFEFF;fontSize=11;strokeColor=#06B6D4;" vertex="1" parent="1">
+          <mxGeometry x="620" y="360" width="240" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="payment_svc" value="Service: payment-svc" style="ellipse;fillColor=#ECFEFF;fontSize=11;strokeColor=#036880;" vertex="1" parent="1">
+          <mxGeometry x="680" y="470" width="140" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Kafka StatefulSet / Cluster -->
+        <mxCell id="kafka_box" value="Kafka Cluster (StatefulSet)\nBrokers=3, ZK=3" style="rounded=1;fillColor=#F3F4F6;fontSize=12;strokeColor=#374151;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="920" y="240" width="320" height="220" as="geometry"/>
+        </mxCell>
+
+        <!-- Kafka topics annotation -->
+        <mxCell id="kafka_topics" value="Topics:\n - booking-events\n - payment-events\n - seat-lock-events\n - notification-events\n - audit-events" style="text;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="950" y="300" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Search / Elasticsearch cluster -->
+        <mxCell id="es_box" value="Elasticsearch (StatefulSet)\nreplicas=3" style="rounded=1;fillColor=#EEF2FF;fontSize=11;strokeColor=#7C3AED;" vertex="1" parent="1">
+          <mxGeometry x="920" y="480" width="320" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Observability cluster -->
+        <mxCell id="obs_box" value="Observability\nPrometheus, Grafana, Zipkin, ELK" style="rounded=1;fillColor=#F8FAFC;fontSize=11;strokeColor=#94A3B8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="620" width="1160" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- CI/CD -> Helm -->
+        <mxCell id="helm" value="Helm Charts\n(One chart per service or umbrella)" style="rounded=1;fillColor=#FEF3C7;fontSize=11;strokeColor=#F59E0B;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="200" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ConfigMaps & Secrets -->
+        <mxCell id="configmap" value="ConfigMaps & Secrets\n(DB creds, JWT secrets, Kafka config)" style="rounded=1;fillColor=#FFF7ED;fontSize=11;strokeColor=#F97316;" vertex="1" parent="1">
+          <mxGeometry x="440" y="100" width="240" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- Persistent Volumes -->
+        <mxCell id="pv" value="PersistentVolumes\n(ES, Postgres PVCs)" style="rounded=1;fillColor=#F8FAFC;fontSize=11;strokeColor=#94A3B8;" vertex="1" parent="1">
+          <mxGeometry x="920" y="620" width="320" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- Database Deployments (Postgres) grouped -->
+        <mxCell id="db_box" value="Databases (Postgres)\n - AuthDB\n - MoviesDB\n - TheatresDB\n - ShowsDB\n - BookingsDB\n - PaymentsDB\n - AuditDB" style="rounded=1;fillColor=#FFF7ED;fontSize=11;strokeColor=#D97706;" vertex="1" parent="1">
+          <mxGeometry x="60" y="840" width="1160" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows: basic flows -->
+        <mxCell id="edge_users_ingress" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#222222;" edge="1" source="users" target="ingress" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_ingress_core" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#222222;" edge="1" source="ingress" target="auth_dep" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_ingress_movie" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#222222;" edge="1" source="ingress" target="movie_dep" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_ingress_booking" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#222222;" edge="1" source="ingress" target="booking_dep" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_booking_redis" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#B91C1C;dashed=0;" edge="1" source="booking_dep" target="redis_ss" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_booking_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#374151;dashed=1;" edge="1" source="booking_dep" target="kafka_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_payment_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#374151;dashed=1;" edge="1" source="payment_dep" target="kafka_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_kafka_audit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#374151;dashed=1;" edge="1" source="kafka_box" target="db_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_es_kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#7C3AED;dashed=1;" edge="1" source="kafka_box" target="es_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_prom" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#65A30D;dashed=1;" edge="1" source="obs_box" target="ingress" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_ci_helm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#111827;dashed=1;" edge="1" source="ci" target="helm" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_configmap" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#F97316;dashed=1;" edge="1" source="configmap" target="auth_dep" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_configmap2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#F97316;dashed=1;" edge="1" source="configmap" target="booking_dep" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Additional labels for PVs -->
+        <mxCell id="edge_pv_es" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#94A3B8;dashed=1;" edge="1" source="pv" target="es_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

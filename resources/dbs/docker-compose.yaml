@@ -1,0 +1,137 @@
+version: "3.9"
+
+services:
+
+  # -----------------------
+  # POSTGRES DATABASES
+  # -----------------------
+
+  auth-db:
+    image: postgres:16
+    container_name: auth-db
+    environment:
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_pass
+      POSTGRES_DB: auth_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+
+  movie-db:
+    image: postgres:16
+    container_name: movie-db
+    environment:
+      POSTGRES_USER: movie_user
+      POSTGRES_PASSWORD: movie_pass
+      POSTGRES_DB: movie_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - movie_data:/var/lib/postgresql/data
+
+  theatre-db:
+    image: postgres:16
+    container_name: theatre-db
+    environment:
+      POSTGRES_USER: theatre_user
+      POSTGRES_PASSWORD: theatre_pass
+      POSTGRES_DB: theatre_db
+    ports:
+      - "5435:5432"
+    volumes:
+      - theatre_data:/var/lib/postgresql/data
+
+  showtime-db:
+    image: postgres:16
+    container_name: showtime-db
+    environment:
+      POSTGRES_USER: showtime_user
+      POSTGRES_PASSWORD: showtime_pass
+      POSTGRES_DB: showtime_db
+    ports:
+      - "5436:5432"
+    volumes:
+      - showtime_data:/var/lib/postgresql/data
+
+  booking-db:
+    image: postgres:16
+    container_name: booking-db
+    environment:
+      POSTGRES_USER: booking_user
+      POSTGRES_PASSWORD: booking_pass
+      POSTGRES_DB: booking_db
+    ports:
+      - "5437:5432"
+    volumes:
+      - booking_data:/var/lib/postgresql/data
+
+  payment-db:
+    image: postgres:16
+    container_name: payment-db
+    environment:
+      POSTGRES_USER: payment_user
+      POSTGRES_PASSWORD: payment_pass
+      POSTGRES_DB: payment_db
+    ports:
+      - "5438:5432"
+    volumes:
+      - payment_data:/var/lib/postgresql/data
+
+  audit-db:
+    image: postgres:16
+    container_name: audit-db
+    environment:
+      POSTGRES_USER: audit_user
+      POSTGRES_PASSWORD: audit_pass
+      POSTGRES_DB: audit_db
+    ports:
+      - "5439:5432"
+    volumes:
+      - audit_data:/var/lib/postgresql/data
+
+
+  # -----------------------
+  # REDIS (Seat Lock Cache)
+  # -----------------------
+
+  redis:
+    image: redis:7
+    container_name: redis
+    command: ["redis-server", "--requirepass", "redis_pass"]
+    environment:
+      REDIS_PASSWORD: redis_pass
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+
+  # -----------------------
+  # ELASTICSEARCH (Search)
+  # -----------------------
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    container_name: elasticsearch
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      xpack.security.enabled: "false"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+
+volumes:
+  auth_data:
+  movie_data:
+  theatre_data:
+  showtime_data:
+  booking_data:
+  payment_data:
+  audit_data:
+  redis_data:
+  es_data:
