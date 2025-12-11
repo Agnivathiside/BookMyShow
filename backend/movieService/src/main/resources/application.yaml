@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: MovieService
+  profiles:
+    active: local
