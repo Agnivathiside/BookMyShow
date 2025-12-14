@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "MovieEvent",
+  "namespace": "com.bookmyshow.movie.events",
+  "fields": [
+    {
+      "name": "movieId",
+      "type": "string"
+    },
+    {
+      "name": "eventType",
+      "type": {
+        "type": "enum",
+        "name": "MovieEventType",
+        "symbols": [
+          "MOVIE_CREATED",
+          "MOVIE_UPDATED",
+          "MOVIE_DELETED"
+        ]
+      }
+    },
+    {
+      "name": "payload",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}
